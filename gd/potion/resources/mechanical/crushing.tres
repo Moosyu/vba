@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Typing" format=3 uid="uid://babiiayer8jn5"]
+
+[ext_resource type="Script" uid="uid://wpitd3feedic" path="res://scripts/keyboard/typing_base.gd" id="1_r5akn"]
+[ext_resource type="PackedScene" uid="uid://dau3dw7ynlxf4" path="res://scenes/keyboard/typing.tscn" id="1_w5bsx"]
+
+[resource]
+script = ExtResource("1_r5akn")
+scene = ExtResource("1_w5bsx")
+metadata/_custom_type_script = "uid://wpitd3feedic"

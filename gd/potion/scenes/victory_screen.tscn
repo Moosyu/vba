@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://dn6ggjehuv3y6"]
+
+[ext_resource type="Script" uid="uid://bnjun1viy51gu" path="res://scripts/victory_screen.gd" id="1_1juoc"]
+[ext_resource type="Texture2D" uid="uid://h05s5b5einme" path="res://assets/gui/wall.png" id="1_wdgif"]
+[ext_resource type="FontFile" uid="uid://cn70ydj1ldlau" path="res://assets/fonts/friendlyscribbles.ttf" id="2_pfcnd"]
+[ext_resource type="StyleBox" uid="uid://b80066dsavh4c" path="res://resources/labels/wizard_button.tres" id="3_pfcnd"]
+[ext_resource type="AudioStream" uid="uid://dlhe31a3m851a" path="res://assets/sounds/party_blower.wav" id="4_ll51u"]
+[ext_resource type="Texture2D" uid="uid://dlfehplv1cxnp" path="res://assets/symbols/confetti.png" id="5_1juoc"]
+
+[sub_resource type="Gradient" id="Gradient_ll51u"]
+offsets = PackedFloat32Array(0, 0.28959277, 0.3020478, 0.7337884, 1)
+colors = PackedColorArray(0.4862745, 0, 0.6392157, 1, 0.5058824, 0.12156863, 0.5058824, 1, 0.9143314, 0.67652524, 7.70092e-07, 1, 0.9702228, 0.6161064, 1.540184e-06, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wbi6c"]
+gradient = SubResource("Gradient_ll51u")
+
+[sub_resource type="Curve" id="Curve_1juoc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.24, 0.74), 0.0, 0.0, 0, 0, Vector2(0.69, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.75), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ll51u"]
+curve = SubResource("Curve_1juoc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_57rl3"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(600, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = -30.0
+initial_velocity_max = -25.0
+angular_velocity_min = -18.000015
+angular_velocity_max = 179.99998
+gravity = Vector3(0, 250, 0)
+damping_min = 74.0
+damping_max = 78.0
+damping_curve = SubResource("CurveTexture_ll51u")
+color_initial_ramp = SubResource("GradientTexture1D_wbi6c")
+hue_variation_min = -0.020000022
+hue_variation_max = 0.019999977
+anim_speed_min = 2.0
+anim_speed_max = 5.0
+anim_offset_max = 1.0
+
+[node name="VictoryScreen" type="CanvasLayer" unique_id=1938703152]
+script = ExtResource("1_1juoc")
+
+[node name="BackgroundRect" type="TextureRect" parent="." unique_id=514135558]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_wdgif")
+stretch_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=1028526817]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = -24.5
+offset_right = 39.0
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("2_pfcnd")
+theme_override_font_sizes/font_size = 64
+text = "You did it!
+(You win)"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=1745021955]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -105.5
+offset_top = -127.0
+offset_right = 105.5
+offset_bottom = -86.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_pfcnd")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_pfcnd")
+theme_override_styles/pressed = ExtResource("3_pfcnd")
+theme_override_styles/hover = ExtResource("3_pfcnd")
+theme_override_styles/disabled = ExtResource("3_pfcnd")
+theme_override_styles/focus = ExtResource("3_pfcnd")
+text = "Back to menu"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1877617555]
+stream = ExtResource("4_ll51u")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1399499433]
+position = Vector2(580, -43)
+emitting = false
+amount = 600
+texture = ExtResource("5_1juoc")
+lifetime = 6.0
+one_shot = true
+explosiveness = 0.6
+randomness = 0.41
+process_material = SubResource("ParticleProcessMaterial_57rl3")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

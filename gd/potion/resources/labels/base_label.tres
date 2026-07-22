@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://djmdujcyxyia5"]
+
+[ext_resource type="FontFile" uid="uid://cn70ydj1ldlau" path="res://assets/fonts/friendlyscribbles.ttf" id="1_2pmdv"]
+
+[resource]
+font = ExtResource("1_2pmdv")
+font_size = 20
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)

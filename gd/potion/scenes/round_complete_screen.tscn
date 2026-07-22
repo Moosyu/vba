@@ -1,0 +1,182 @@
+[gd_scene format=3 uid="uid://ba8w116ntbkex"]
+
+[ext_resource type="Script" uid="uid://dta5ip462b7ai" path="res://scripts/round_complete_screen.gd" id="1_wkbhf"]
+[ext_resource type="Shader" uid="uid://dbhinq5lkkte2" path="res://assets/shaders/blur.gdshader" id="2_vvas3"]
+[ext_resource type="LabelSettings" uid="uid://djmdujcyxyia5" path="res://resources/labels/base_label.tres" id="3_cgk0y"]
+[ext_resource type="FontFile" uid="uid://cn70ydj1ldlau" path="res://assets/fonts/friendlyscribbles.ttf" id="4_6hkft"]
+[ext_resource type="StyleBox" uid="uid://b80066dsavh4c" path="res://resources/labels/wizard_button.tres" id="5_fm3ig"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_57rl3"]
+shader = ExtResource("2_vvas3")
+shader_parameter/blur_amount = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cgk0y"]
+
+[sub_resource type="Animation" id="Animation_cgk0y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BackdropBlur:material:shader_parameter/blur_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ContentContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(226, 99)]
+}
+
+[sub_resource type="Animation" id="Animation_vvas3"]
+resource_name = "complete_appear"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BackdropBlur:material:shader_parameter/blur_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 2.000000095]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ContentContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1200, 99), Vector2(226, 99)]
+}
+
+[sub_resource type="Animation" id="Animation_ymycq"]
+resource_name = "complete_disappear"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BackdropBlur:material:shader_parameter/blur_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.000000095, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ContentContainer:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(226, 99), Vector2(1200, 99)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cgk0y"]
+_data = {
+&"RESET": SubResource("Animation_cgk0y"),
+&"complete_appear": SubResource("Animation_vvas3"),
+&"complete_disappear": SubResource("Animation_ymycq")
+}
+
+[node name="RoundCompleteScreen" type="CanvasLayer" unique_id=1904196253]
+layer = 3
+script = ExtResource("1_wkbhf")
+
+[node name="BackdropBlur" type="ColorRect" parent="." unique_id=858129673]
+material = SubResource("ShaderMaterial_57rl3")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ContentContainer" type="PanelContainer" parent="." unique_id=723102676]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -225.0
+offset_right = 350.00024
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cgk0y")
+
+[node name="VBoxContainerTop" type="VBoxContainer" parent="ContentContainer" unique_id=442382991]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="ContentContainer/VBoxContainerTop" unique_id=1093101390]
+layout_mode = 2
+text = "__ brewed!"
+label_settings = ExtResource("3_cgk0y")
+horizontal_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="ContentContainer/VBoxContainerTop" unique_id=1808091744]
+layout_mode = 2
+text = "Time: 0s."
+label_settings = ExtResource("3_cgk0y")
+horizontal_alignment = 1
+
+[node name="Stars" type="Control" parent="ContentContainer/VBoxContainerTop" unique_id=279247347]
+custom_minimum_size = Vector2(375, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainerBottom" type="VBoxContainer" parent="ContentContainer" unique_id=1787373347]
+layout_mode = 2
+alignment = 2
+
+[node name="ContinueButton" type="Button" parent="ContentContainer/VBoxContainerBottom" unique_id=345936711]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+mouse_default_cursor_shape = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_6hkft")
+theme_override_styles/normal = ExtResource("5_fm3ig")
+theme_override_styles/pressed = ExtResource("5_fm3ig")
+theme_override_styles/hover = ExtResource("5_fm3ig")
+theme_override_styles/focus = ExtResource("5_fm3ig")
+text = "Continue"
+
+[node name="ContainerAnimator" type="AnimationPlayer" parent="ContentContainer" unique_id=943797020]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_cgk0y")
+
+[node name="ScoreLabels" type="Control" parent="." unique_id=1415179129]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 222.0
+offset_top = 297.0
+offset_right = 930.0
+offset_bottom = 497.0
+
+[connection signal="pressed" from="ContentContainer/VBoxContainerBottom/ContinueButton" to="." method="_on_button_pressed"]
+[connection signal="animation_finished" from="ContentContainer/ContainerAnimator" to="." method="_on_animation_player_animation_finished"]

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Sigil" format=3 uid="uid://btochi61p0ou7"]
+
+[ext_resource type="Texture2D" uid="uid://d6clv7oaiyjy" path="res://assets/sigils/essence-extraction-alt.png" id="1_w21il"]
+[ext_resource type="Script" uid="uid://dthta0v0raq8p" path="res://scripts/mouse/sigil_base.gd" id="2_tjvid"]
+
+[resource]
+script = ExtResource("2_tjvid")
+match_threshold = 85.0
+icon = ExtResource("1_w21il")
+minigame_type = 1
+metadata/_custom_type_script = "uid://dthta0v0raq8p"

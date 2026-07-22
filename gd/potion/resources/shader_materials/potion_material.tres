@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bg2tyj2jvxhra"]
+
+[ext_resource type="Shader" uid="uid://cehc37vlau5vl" path="res://assets/shaders/potion_liquid.gdshader" id="1_n458k"]
+
+[resource]
+shader = ExtResource("1_n458k")
+shader_parameter/potion_color = Color(0, 0, 0, 1)
+shader_parameter/fill_level = 0.59200002812
+shader_parameter/amplitude = 0.034000001615
+shader_parameter/frequency = 10.4390004958525
+shader_parameter/speed = 0.800000038
+shader_parameter/pixel_size = 71.08700299663249

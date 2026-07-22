@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://jritg4ps60ry"]
+
+[ext_resource type="Script" uid="uid://b10h1w6cmk5m4" path="res://scripts/keyboard/slice.gd" id="1_jfoc3"]
+[ext_resource type="Texture2D" uid="uid://bjspgtyup7jc2" path="res://assets/ingredients/miracle_fruit.png" id="1_ydcw2"]
+[ext_resource type="Texture2D" uid="uid://c4oemby72xjvu" path="res://assets/mechanical/cutting_board.png" id="2_6ed3l"]
+[ext_resource type="AudioStream" uid="uid://tmwlwaf4mknf" path="res://assets/mechanical/cut.wav" id="4_t7xs2"]
+
+[node name="Slice" type="Node2D" unique_id=1741926848]
+script = ExtResource("1_jfoc3")
+
+[node name="CuttingBoard" type="Sprite2D" parent="." unique_id=1621912240]
+position = Vector2(15.000001, 6)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_6ed3l")
+
+[node name="Ingredient" type="Sprite2D" parent="." unique_id=1930253871]
+texture = ExtResource("1_ydcw2")
+
+[node name="SliceStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1829183042]
+stream = ExtResource("4_t7xs2")
+volume_db = -10.0

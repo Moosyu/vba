@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://byqvbdqu88q3d"]
+
+[ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_3q8uu"]
+[ext_resource type="Script" uid="uid://bfmc8av4kl1sw" path="res://scripts/potions/potion_base.gd" id="2_47pps"]
+[ext_resource type="Resource" uid="uid://drbfdmpmx7wt6" path="res://resources/ingredients/sugarcane.tres" id="2_scn23"]
+[ext_resource type="Resource" uid="uid://sdfwqdmq3b3l" path="res://resources/ingredients/miracle_fruit.tres" id="3_s5iai"]
+
+[resource]
+script = ExtResource("2_47pps")
+name = "Potion of Swiftness"
+ingredients = Array[ExtResource("1_3q8uu")]([ExtResource("2_scn23"), ExtResource("3_s5iai")])
+potion_time_modification = 1.15
+potion_color = Color(0, 0.83924, 0.45631802, 1)
+metadata/_custom_type_script = "uid://bfmc8av4kl1sw"

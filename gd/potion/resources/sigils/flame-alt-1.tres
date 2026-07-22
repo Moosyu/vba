@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Sigil" format=3 uid="uid://73kj1n5ibfny"]
+
+[ext_resource type="Texture2D" uid="uid://3cpygr2xhup6" path="res://assets/sigils/fire-alt-2.png" id="1_sgowj"]
+[ext_resource type="Script" uid="uid://dthta0v0raq8p" path="res://scripts/mouse/sigil_base.gd" id="2_2tagx"]
+
+[resource]
+script = ExtResource("2_2tagx")
+match_threshold = 65.0
+icon = ExtResource("1_sgowj")
+minigame_type = 1
+metadata/_custom_type_script = "uid://dthta0v0raq8p"

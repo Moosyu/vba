@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://bco4jv4hs1x4k"]
+
+[ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_bko76"]
+[ext_resource type="Script" uid="uid://bfmc8av4kl1sw" path="res://scripts/potions/potion_base.gd" id="2_djyou"]
+[ext_resource type="Resource" uid="uid://duujlkqfewkdo" path="res://resources/ingredients/starfruit.tres" id="2_ytvee"]
+
+[resource]
+script = ExtResource("2_djyou")
+name = "Potion of Glowing"
+ingredients = Array[ExtResource("1_bko76")]([ExtResource("2_ytvee")])
+potion_time_modification = 0.8
+potion_color = Color(1, 0.9254902, 0, 1)
+metadata/_custom_type_script = "uid://bfmc8av4kl1sw"

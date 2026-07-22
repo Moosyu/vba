@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://3xrj4uax468m"]
+
+[ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_4p00p"]
+[ext_resource type="Script" uid="uid://bfmc8av4kl1sw" path="res://scripts/potions/potion_base.gd" id="2_0qy1j"]
+[ext_resource type="Resource" uid="uid://bu3pm1q87q0av" path="res://resources/ingredients/illusion_crystal.tres" id="2_gouix"]
+[ext_resource type="Resource" uid="uid://cfnreypio3n4y" path="res://resources/ingredients/black_lilypad.tres" id="3_g40ub"]
+
+[resource]
+script = ExtResource("2_0qy1j")
+name = "Potion of Invisibility"
+ingredients = Array[ExtResource("1_4p00p")]([ExtResource("2_gouix"), ExtResource("3_g40ub")])
+potion_time_modification = 1.1
+potion_color = Color(0.4627451, 0.4627451, 0.4627451, 0.6862745)
+metadata/_custom_type_script = "uid://bfmc8av4kl1sw"

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bcyrqg1uysnjt"]
+
+[ext_resource type="AudioStream" uid="uid://bhk72wt4wtykj" path="res://assets/music/brain_empty.wav" id="1_ql6qh"]
+[ext_resource type="Script" uid="uid://dmpb4v7t46uv1" path="res://scripts/global/music_player.gd" id="2_l7xiw"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" unique_id=408067944]
+stream = ExtResource("1_ql6qh")
+script = ExtResource("2_l7xiw")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

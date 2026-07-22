@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://cra7eifg56v2k"]
+
+[ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_frgxq"]
+[ext_resource type="Resource" uid="uid://cprekgomiehb8" path="res://resources/ingredients/wiggle_wart.tres" id="2_50m6n"]
+[ext_resource type="Resource" uid="uid://cgn7ak8pqevcd" path="res://resources/ingredients/heart_crystal.tres" id="2_iw4hi"]
+[ext_resource type="Script" uid="uid://bfmc8av4kl1sw" path="res://scripts/potions/potion_base.gd" id="2_vaulv"]
+
+[resource]
+script = ExtResource("2_vaulv")
+name = "Healing Potion"
+ingredients = Array[ExtResource("1_frgxq")]([ExtResource("2_50m6n"), ExtResource("2_iw4hi")])
+potion_time_modification = 1.2
+potion_color = Color(0.9037323, 0.014459585, 4.813075e-06, 1)
+metadata/_custom_type_script = "uid://bfmc8av4kl1sw"

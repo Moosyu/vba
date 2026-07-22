@@ -1,0 +1,153 @@
+[gd_scene format=3 uid="uid://dau3dw7ynlxf4"]
+
+[ext_resource type="Script" uid="uid://cnlq6cprllpiy" path="res://scripts/keyboard/typing.gd" id="1_86mje"]
+[ext_resource type="LabelSettings" uid="uid://djmdujcyxyia5" path="res://resources/labels/base_label.tres" id="2_yhs8d"]
+[ext_resource type="FontFile" uid="uid://cn70ydj1ldlau" path="res://assets/fonts/friendlyscribbles.ttf" id="3_pr0xd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yyghg"]
+bg_color = Color(0.15294118, 0.15294118, 0.15294118, 0.7058824)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tpf68"]
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Animation" id="Animation_tpf68"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PressBorder:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PressBorder:theme_override_styles/panel:border_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jxie8"]
+resource_name = "press_border_shrink"
+length = 2.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PressBorder:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PressBorder:theme_override_styles/panel:border_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.101960786, 0.10980392, 1), Color(1, 0.101960786, 0.10980392, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uy4aq"]
+_data = {
+&"RESET": SubResource("Animation_tpf68"),
+&"press_border_shrink": SubResource("Animation_jxie8")
+}
+
+[node name="Typing" type="Node2D" unique_id=2001079599]
+script = ExtResource("1_86mje")
+
+[node name="NewKeyTimer" type="Timer" parent="." unique_id=1365243089]
+one_shot = true
+
+[node name="InstructionLabel" type="Label" parent="." unique_id=683889864]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -204.0
+offset_top = -173.0
+offset_right = 204.0
+offset_bottom = -150.0
+grow_horizontal = 2
+text = "Press the key before the red square closes."
+label_settings = ExtResource("2_yhs8d")
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="Control" parent="." unique_id=525630830]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_top = -146.0
+offset_right = 40.0
+offset_bottom = -66.0
+grow_horizontal = 2
+
+[node name="PressContainer" type="PanelContainer" parent="ButtonContainer" unique_id=75098745]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yyghg")
+
+[node name="PressLabel" type="Label" parent="ButtonContainer/PressContainer" unique_id=2147142520]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_pr0xd")
+horizontal_alignment = 1
+
+[node name="PressBorder" type="Panel" parent="ButtonContainer" unique_id=563242633]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(40, 40)
+theme_override_styles/panel = SubResource("StyleBoxFlat_tpf68")
+
+[node name="ClosingAnimationPlayer" type="AnimationPlayer" parent="ButtonContainer/PressBorder" unique_id=1441156711]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_uy4aq")
+
+[connection signal="timeout" from="NewKeyTimer" to="." method="_on_new_key_timer_timeout"]

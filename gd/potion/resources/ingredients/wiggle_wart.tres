@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://cprekgomiehb8"]
+
+[ext_resource type="Texture2D" uid="uid://b387ie8bmb3e8" path="res://assets/ingredients/wigglewart.png" id="1_0ndm7"]
+[ext_resource type="Script" uid="uid://dd1va8khh8h5n" path="res://scripts/minigame_base.gd" id="1_6d2gy"]
+[ext_resource type="Resource" uid="uid://b6qfm86a2yj1e" path="res://resources/sigils/flame.tres" id="1_82hd7"]
+[ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_hyshb"]
+[ext_resource type="Script" uid="uid://eh3ixbgnbno1" path="res://scripts/minigame_options.gd" id="2_y2d2a"]
+[ext_resource type="Resource" uid="uid://doaqteuomv4ko" path="res://resources/sigils/essence_extraction.tres" id="3_oewc3"]
+[ext_resource type="Resource" uid="uid://73kj1n5ibfny" path="res://resources/sigils/flame-alt-1.tres" id="5_wqu8d"]
+[ext_resource type="Resource" uid="uid://3q4dy66kaaqh" path="res://resources/sigils/flame-alt-2.tres" id="6_83dku"]
+[ext_resource type="Resource" uid="uid://btochi61p0ou7" path="res://resources/sigils/essence_extraction-alt.tres" id="8_gcx08"]
+
+[sub_resource type="Resource" id="Resource_e4adt"]
+script = ExtResource("2_y2d2a")
+minigames = Array[ExtResource("1_6d2gy")]([ExtResource("1_82hd7"), ExtResource("5_wqu8d"), ExtResource("6_83dku")])
+metadata/_custom_type_script = "uid://eh3ixbgnbno1"
+
+[sub_resource type="Resource" id="Resource_w2ndx"]
+script = ExtResource("2_y2d2a")
+minigames = Array[ExtResource("1_6d2gy")]([ExtResource("3_oewc3"), ExtResource("8_gcx08")])
+metadata/_custom_type_script = "uid://eh3ixbgnbno1"
+
+[resource]
+script = ExtResource("1_hyshb")
+name = "Wiggle Wart"
+preperation_minigames = Array[ExtResource("2_y2d2a")]([SubResource("Resource_e4adt"), SubResource("Resource_w2ndx")])
+initial_state = ExtResource("1_0ndm7")
+metadata/_custom_type_script = "uid://b6fm5nes3hrhy"

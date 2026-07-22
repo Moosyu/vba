@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://xfsp14ymeqwl"]
+
+[ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_ugbg3"]
+[ext_resource type="Resource" uid="uid://cgn7ak8pqevcd" path="res://resources/ingredients/heart_crystal.tres" id="2_vlv1o"]
+[ext_resource type="Script" uid="uid://bfmc8av4kl1sw" path="res://scripts/potions/potion_base.gd" id="2_x3c5t"]
+[ext_resource type="Resource" uid="uid://sdfwqdmq3b3l" path="res://resources/ingredients/miracle_fruit.tres" id="3_mrdsd"]
+[ext_resource type="Resource" uid="uid://5skro2a8y50u" path="res://resources/ingredients/golden_fig.tres" id="4_gj7bl"]
+[ext_resource type="Resource" uid="uid://cym5ko6638uk5" path="res://resources/ingredients/flaming_spirit.tres" id="5_mrdsd"]
+
+[resource]
+script = ExtResource("2_x3c5t")
+name = "Elixir of Life"
+ingredients = Array[ExtResource("1_ugbg3")]([ExtResource("2_vlv1o"), ExtResource("3_mrdsd"), ExtResource("4_gj7bl"), ExtResource("5_mrdsd")])
+potion_time_modification = 2.0
+potion_color = Color(0.99999994, 0.23946875, 0.1787923, 1)
+metadata/_custom_type_script = "uid://bfmc8av4kl1sw"

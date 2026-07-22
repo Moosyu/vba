@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://lfkfsows2dce"]
+
+[ext_resource type="Script" uid="uid://bp45y5ye2jq27" path="res://scripts/mouse/sigil_drawing.gd" id="1_chiaj"]
+
+[node name="SigilDrawing" type="Node2D" unique_id=1566019245]
+
+[node name="SigilCanvas" type="Sprite2D" parent="." unique_id=1439497226]
+script = ExtResource("1_chiaj")
+
+[node name="PathStars" type="Node2D" parent="." unique_id=273213242]

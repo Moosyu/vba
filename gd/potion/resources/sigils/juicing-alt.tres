@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Sigil" format=3 uid="uid://dbasu3qu6uwlr"]
+
+[ext_resource type="Texture2D" uid="uid://dirxxbwj7gq4o" path="res://assets/sigils/juicing-alt.png" id="1_3hqq1"]
+[ext_resource type="Script" uid="uid://dthta0v0raq8p" path="res://scripts/mouse/sigil_base.gd" id="2_wvy1o"]
+
+[resource]
+script = ExtResource("2_wvy1o")
+match_threshold = 65.0
+icon = ExtResource("1_3hqq1")
+minigame_type = 1
+metadata/_custom_type_script = "uid://dthta0v0raq8p"

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://sdfwqdmq3b3l"]
+
+[ext_resource type="Script" uid="uid://dd1va8khh8h5n" path="res://scripts/minigame_base.gd" id="1_l4ea5"]
+[ext_resource type="Texture2D" uid="uid://bjspgtyup7jc2" path="res://assets/ingredients/miracle_fruit.png" id="1_utb4p"]
+[ext_resource type="Script" uid="uid://eh3ixbgnbno1" path="res://scripts/minigame_options.gd" id="2_upau1"]
+[ext_resource type="Resource" uid="uid://y8n2nyt1bxe0" path="res://resources/sigils/juicing.tres" id="2_utb4p"]
+[ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="2_xb1b4"]
+[ext_resource type="Resource" uid="uid://nq24dp6nlk3e" path="res://resources/mechanical/cutting.tres" id="3_na1xn"]
+[ext_resource type="Resource" uid="uid://dbasu3qu6uwlr" path="res://resources/sigils/juicing-alt.tres" id="6_itcxy"]
+
+[sub_resource type="Resource" id="Resource_37xxi"]
+script = ExtResource("2_upau1")
+minigames = Array[ExtResource("1_l4ea5")]([ExtResource("3_na1xn")])
+metadata/_custom_type_script = "uid://eh3ixbgnbno1"
+
+[sub_resource type="Resource" id="Resource_7wctj"]
+script = ExtResource("2_upau1")
+minigames = Array[ExtResource("1_l4ea5")]([ExtResource("2_utb4p"), ExtResource("6_itcxy")])
+metadata/_custom_type_script = "uid://eh3ixbgnbno1"
+
+[resource]
+script = ExtResource("2_xb1b4")
+name = "Miracle Fruit"
+preperation_minigames = Array[ExtResource("2_upau1")]([SubResource("Resource_37xxi"), SubResource("Resource_7wctj")])
+initial_state = ExtResource("1_utb4p")
+metadata/_custom_type_script = "uid://b6fm5nes3hrhy"

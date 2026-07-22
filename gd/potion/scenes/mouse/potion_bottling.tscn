@@ -1,0 +1,203 @@
+[gd_scene format=3 uid="uid://c47r5qe8xe2ah"]
+
+[ext_resource type="Script" uid="uid://cgxhqiduqdhh5" path="res://scripts/mouse/potion_bottling.gd" id="1_ft57w"]
+[ext_resource type="Script" uid="uid://cqirnnjlwas42" path="res://scripts/mouse/cork.gd" id="2_2j23a"]
+[ext_resource type="Script" uid="uid://qq8lxewnhtgu" path="res://scripts/mouse/potion_liquid.gd" id="2_7rf0y"]
+[ext_resource type="Texture2D" uid="uid://cowq405yxhb3r" path="res://assets/potions/potion.png" id="2_40df4"]
+[ext_resource type="Material" uid="uid://bg2tyj2jvxhra" path="res://resources/shader_materials/potion_material.tres" id="2_ft57w"]
+[ext_resource type="Texture2D" uid="uid://cp4ph5k08jxmn" path="res://assets/symbols/star.png" id="4_2j23a"]
+[ext_resource type="Script" uid="uid://dchw64sops14i" path="res://scripts/mouse/star_particles_2d.gd" id="5_ypklg"]
+[ext_resource type="FontFile" uid="uid://cn70ydj1ldlau" path="res://assets/fonts/friendlyscribbles.ttf" id="8_ft57w"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_wq45t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wq45t"]
+size = Vector2(50, 20)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7rf0y"]
+load_path = "res://.godot/imported/cork.png-153e201e6b4bb10530bf5a517c499f6e.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40df4"]
+size = Vector2(13, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2j23a"]
+size = Vector2(15, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ypklg"]
+size = Vector2(63, 20)
+
+[sub_resource type="Gradient" id="Gradient_ypklg"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_ft57w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PotionSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Cork/CorkSprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7rf0y"]
+resource_name = "potion_fade_out"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PotionSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Cork/CorkSprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ft57w"]
+_data = {
+&"RESET": SubResource("Animation_ft57w"),
+&"potion_fade_out": SubResource("Animation_7rf0y")
+}
+
+[node name="PotionBottling" type="CanvasLayer" unique_id=907188558]
+layer = 2
+script = ExtResource("1_ft57w")
+
+[node name="Potion" type="StaticBody2D" parent="." unique_id=1067066266]
+position = Vector2(573, 328.00003)
+scale = Vector2(3, 3)
+input_pickable = true
+
+[node name="PotionLiquid" type="Sprite2D" parent="Potion" unique_id=49710663]
+material = ExtResource("2_ft57w")
+position = Vector2(0.4999985, 11.3333435)
+scale = Vector2(72.33334, 78.66667)
+texture = SubResource("CanvasTexture_wq45t")
+script = ExtResource("2_7rf0y")
+
+[node name="PotionSprite" type="Sprite2D" parent="Potion" unique_id=1723266931]
+texture = ExtResource("2_40df4")
+metadata/_edit_lock_ = true
+
+[node name="PotionPolygonCollision" type="CollisionPolygon2D" parent="Potion" unique_id=353469754]
+polygon = PackedVector2Array(8.800003, -44.2, 7, -41.333336, 7, -32, 8.300003, -18.3, 8.300003, -5.5999985, 26.699997, 4.699997, 28.5, 4.699997, 34, 15.800003, 32.300003, 38.4, 32.300003, 39, 24.300003, 45.9, 11.300003, 49, -10.400002, 48.300003, -18.3, 48.300003, -30.6, 37.9, -33.3, 17.099998, -33.3, 12.5, -23.3, -0.40000153, -12.900002, -5.299999, -9.700001, -5.299999, -8, -30, -8.333328, -40, -11.900002, -43, -18.7, -15.900002, -18.7, -14.200001, -32.4, -4.700001, -34.7, -4.700001, -41.7, 13.300003, -42, 17, -42.7, 30.699997, -42.7, 36.5, -34.7, 48.5, -34.7, 51.6, -27.7, 54.5, -27.7, 56.199997, -12.799999, 58.699997, 17.199997, 58.699997, 36.300003, 49.699997, 38, 46, 41, 38, 43, 33, 43, 22, 42, 18, 42, 12, 36.699997, -0.5, 36.699997, -2.5, 17.400002, -12.200001, 15.699997, -29.8, 15.699997, -39.1)
+metadata/_edit_lock_ = true
+
+[node name="PotionOpening" type="Area2D" parent="Potion" unique_id=367436208]
+position = Vector2(-0.33332825, -30.333336)
+scale = Vector2(0.33333334, 0.33333334)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Potion/PotionOpening" unique_id=73501369]
+shape = SubResource("RectangleShape2D_wq45t")
+metadata/_edit_lock_ = true
+
+[node name="Cork" type="RigidBody2D" parent="." unique_id=1387004191]
+position = Vector2(801, 475)
+input_pickable = true
+script = ExtResource("2_2j23a")
+
+[node name="CorkSprite" type="Sprite2D" parent="Cork" unique_id=1680388138]
+scale = Vector2(3, 3)
+texture = SubResource("CompressedTexture2D_7rf0y")
+metadata/_edit_lock_ = true
+
+[node name="HitCollisionShape" type="CollisionShape2D" parent="Cork" unique_id=2084688294]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_40df4")
+debug_color = Color(0, 0.6, 0.69803923, 0)
+metadata/_edit_lock_ = true
+
+[node name="HoverCollisionShape" type="CollisionShape2D" parent="Cork" unique_id=1751446309]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_2j23a")
+debug_color = Color(0.9529412, 0, 0.5529412, 0)
+metadata/_edit_lock_ = true
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=2072826939]
+position = Vector2(577.00006, 507.99997)
+scale = Vector2(20.351822, -0.4488665)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=239908051]
+shape = SubResource("RectangleShape2D_ypklg")
+metadata/_edit_lock_ = true
+
+[node name="StarParticles2D" type="CPUParticles2D" parent="." unique_id=558531788]
+position = Vector2(568, 216.00003)
+scale = Vector2(0.99999994, 1)
+emitting = false
+amount = 12
+texture = ExtResource("4_2j23a")
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.9
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, 200)
+initial_velocity_min = 140.0
+initial_velocity_max = 140.0
+angular_velocity_min = 30.0
+angular_velocity_max = 60.0
+angle_min = -45.0
+angle_max = 45.0
+scale_amount_min = 0.1
+scale_amount_max = 0.1
+color_ramp = SubResource("Gradient_ypklg")
+script = ExtResource("5_ypklg")
+
+[node name="PotionPlayer" type="AnimationPlayer" parent="." unique_id=902962379]
+root_node = NodePath("../Potion")
+libraries/ = SubResource("AnimationLibrary_ft57w")
+
+[node name="InstructionLabel" type="RichTextLabel" parent="." unique_id=3399953]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -204.0
+offset_top = 154.0
+offset_right = 231.0
+offset_bottom = 213.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("8_ft57w")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "Drag the cork into the potion's slot rightside up."
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="Potion/PotionOpening" to="Cork" method="_on_potion_opening_body_entered"]
+[connection signal="mouse_entered" from="Cork" to="Cork" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Cork" to="Cork" method="_on_mouse_exited"]
+[connection signal="place_cork" from="Cork" to="." method="_on_place_cork"]

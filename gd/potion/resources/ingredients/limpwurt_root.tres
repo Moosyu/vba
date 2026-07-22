@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://c8ktxlr7q31c8"]
+
+[ext_resource type="Resource" uid="uid://y8n2nyt1bxe0" path="res://resources/sigils/juicing.tres" id="1_bssex"]
+[ext_resource type="Texture2D" uid="uid://dw1jjaeuk4xsx" path="res://assets/ingredients/limpurt_root_squeezed_crushed.png" id="1_isluu"]
+[ext_resource type="Script" uid="uid://dd1va8khh8h5n" path="res://scripts/minigame_base.gd" id="1_tbous"]
+[ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_yxgop"]
+[ext_resource type="Texture2D" uid="uid://clep6q4fnut8k" path="res://assets/ingredients/limpwurt_root.png" id="2_isluu"]
+[ext_resource type="Script" uid="uid://eh3ixbgnbno1" path="res://scripts/minigame_options.gd" id="3_311ob"]
+[ext_resource type="Resource" uid="uid://babiiayer8jn5" path="res://resources/mechanical/crushing.tres" id="3_tbous"]
+[ext_resource type="Resource" uid="uid://dbasu3qu6uwlr" path="res://resources/sigils/juicing-alt.tres" id="6_37xxi"]
+
+[sub_resource type="Resource" id="Resource_mh8t7"]
+script = ExtResource("3_311ob")
+minigames = Array[ExtResource("1_tbous")]([ExtResource("1_bssex"), ExtResource("6_37xxi")])
+metadata/_custom_type_script = "uid://eh3ixbgnbno1"
+
+[sub_resource type="Resource" id="Resource_fxnas"]
+script = ExtResource("3_311ob")
+minigames = Array[ExtResource("1_tbous")]([ExtResource("3_tbous")])
+metadata/_custom_type_script = "uid://eh3ixbgnbno1"
+
+[resource]
+script = ExtResource("1_yxgop")
+name = "Limpwurt Root"
+preperation_minigames = Array[ExtResource("3_311ob")]([SubResource("Resource_mh8t7"), SubResource("Resource_fxnas")])
+initial_state = ExtResource("2_isluu")
+final_state = ExtResource("1_isluu")
+metadata/_custom_type_script = "uid://b6fm5nes3hrhy"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://nmb72qpwwu0"]
+
+[ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_3yaaq"]
+[ext_resource type="Script" uid="uid://bfmc8av4kl1sw" path="res://scripts/potions/potion_base.gd" id="2_1axdk"]
+[ext_resource type="Resource" uid="uid://c8ktxlr7q31c8" path="res://resources/ingredients/limpwurt_root.tres" id="2_xvvsr"]
+[ext_resource type="Resource" uid="uid://cprekgomiehb8" path="res://resources/ingredients/wiggle_wart.tres" id="3_kxs3w"]
+
+[resource]
+script = ExtResource("2_1axdk")
+name = "Potion of Strength"
+ingredients = Array[ExtResource("1_3yaaq")]([ExtResource("2_xvvsr"), ExtResource("3_kxs3w")])
+potion_time_modification = 1.2
+potion_color = Color(0.99607843, 0.69411767, 0, 1)
+metadata/_custom_type_script = "uid://bfmc8av4kl1sw"

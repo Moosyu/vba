@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Sigil" format=3 uid="uid://b4o6p3lyv638g"]
+
+[ext_resource type="Texture2D" uid="uid://8badmp1twug3" path="res://assets/sigils/frost.png" id="1_7mm4e"]
+[ext_resource type="Script" uid="uid://dthta0v0raq8p" path="res://scripts/mouse/sigil_base.gd" id="1_bo10v"]
+
+[resource]
+script = ExtResource("1_bo10v")
+match_threshold = 50.0
+icon = ExtResource("1_7mm4e")
+minigame_type = 1
+minigame_name = "frost"
+metadata/_custom_type_script = "uid://dthta0v0raq8p"
