@@ -1,15 +1,18 @@
 ﻿string fileName = "forest_grid_1.txt";
 char[,] fireSpreadGrid = new char[4, 4];
 List<Vector2i> firePositions = new();
-int regenerationStage = 0;
+Vector2i? lastFireSpreadTile = null;
+int step = 0;
+int treeCount = 0;
+Vector2i windDirection;
 
 //enterPath();
 
-Vector2i[] CardinalDirections = {
-    new Vector2i(-1,  0), // left
-    new Vector2i( 1,  0), //right
-    new Vector2i( 0,  1), // up
-    new Vector2i( 0, -1) // down
+Dictionary<Vector2i, char> CardinalDirections = new() {
+    { new Vector2i(-1,  0), 'W' },
+    { new Vector2i( 1,  0), 'E' },
+    { new Vector2i( 0,  1), 'S' },
+    { new Vector2i( 0, -1), 'N' }
 };
 
 try {
@@ -35,6 +38,8 @@ try {
             if (currentPosValue != ' ') {
                 if (currentPosValue == 'F') {
                     firePositions.Add(new Vector2i(i / 2, yPos));
+                } else if (currentPosValue == 'T') {
+                    treeCount++;
                 }
                 fireSpreadGrid[i / 2, yPos] = currentPosValue;
             }
@@ -53,26 +58,44 @@ try {
     enterPath();
 }
 
-bool validInitialSquare = false;
-while (!validInitialSquare) {
+while (true) {
     Console.WriteLine("Please enter a square to set on fire! Eg: X,Y");
     string[] initialFireSquareInputSplit = Console.ReadLine().Split(',');
-    
-    if (!int.TryParse(initialFireSquareInputSplit[0], out int x)) {
+
+    if (!int.TryParse(initialFireSquareInputSplit[0], out int x) || x >= fireSpreadGrid.GetLength(0) || x < 0) {
         Console.WriteLine("Your X value was invalid!");
         continue;
     }
 
-    if (!int.TryParse(initialFireSquareInputSplit[1], out int y)) {
+    if (!int.TryParse(initialFireSquareInputSplit[1], out int y) || y >= fireSpreadGrid.GetLength(0) || y < 0) {
         Console.WriteLine("Your Y value is invalid!");
         continue;
     }
 
+    if (fireSpreadGrid[x, y] == 'T') {
+        treeCount--;
+    }
+    
     addFirePosition(new Vector2i(x, y));
-    validInitialSquare = true;
+    break;
 }
 
+while (true) {
+    Console.WriteLine("Enter a direction that the wind blows (N, E, S, W)");
+    char inputDirection = char.ToUpper(Console.ReadKey().KeyChar);
+    Console.WriteLine();
+
+    if (CardinalDirections.ContainsValue(inputDirection)) {
+        windDirection = CardinalDirections.FirstOrDefault(direction => direction.Value == inputDirection).Key;
+        break;
+    } else {
+        Console.WriteLine("Invalid direction!");
+    }
+}
+
+List<Vector2i> frontier = [.. firePositions];
 regenerateFireSpreadGrid();
+
 
 void enterPath() {
     while (!File.Exists(fileName)) {
@@ -100,41 +123,66 @@ void regenerateFireSpreadGrid() {
         Console.WriteLine();
     }
     printBar(fireSpreadGrid.GetLength(1));
+    step++;
+
     if (updateFire()) {
+        Console.WriteLine("Press any key to continue spread.");
+        Console.ReadKey();
         regenerateFireSpreadGrid();
+    } else {
+        Console.WriteLine("Spread simulation has completed (the fire can't spread any further)");
+        Console.WriteLine(treeCount + " trees remain with " + (firePositions.Count - 1) + " having been burned since the initial grid was built.");
+        Console.WriteLine("It took " + step + " steps to complete.");
     }
 
 }
 
-// true if values changed
 bool updateFire() {
-    bool changesMade = false;
-    List<Vector2i> fireQueue = new();
+    List<Vector2i> newFrontier = [];
 
-    foreach (Vector2i position in firePositions) {
-        foreach (Vector2i direction in CardinalDirections) {
-            Vector2i newCoordinate = position + direction;
-            if (newCoordinate.X < fireSpreadGrid.GetLength(0)
-                && newCoordinate.X >= 0
-                && newCoordinate.Y < fireSpreadGrid.GetLength(1)
-                && newCoordinate.Y >= 0
-                && fireSpreadGrid[newCoordinate.X, newCoordinate.Y] == 'T')
-            {
-                changesMade = true;
-                fireQueue.Add(new Vector2i(newCoordinate.X, newCoordinate.Y));
+    foreach (Vector2i firePos in frontier) {
+        foreach (Vector2i direction in CardinalDirections.Keys) {
+            Vector2i next = firePos + direction;
+            if (attemptFireSpreadToTile(next)) {
+                newFrontier.Add(next);
+                if (direction == windDirection) {
+                    Vector2i windNext = next + direction;
+                    if (attemptFireSpreadToTile(windNext)) {
+                        newFrontier.Add(windNext);
+                    }
+                }
             }
         }
     }
 
-    foreach (Vector2i position in fireQueue) {
-        addFirePosition(position);
+    // two fires can have the same neighbouring tree
+    List<Vector2i> distinct = [.. newFrontier.Distinct()];
+    foreach (Vector2i pos in distinct) {
+        addFirePosition(pos);
     }
-    return changesMade;
+
+    frontier = distinct;
+    return distinct.Count > 0;
+}
+
+bool attemptFireSpreadToTile(Vector2i pos) {
+    return isPositionValid(pos) && fireSpreadGrid[pos.X, pos.Y] == 'T';
 }
 
 void addFirePosition(Vector2i position) {
-    fireSpreadGrid[position.X, position.Y] = 'F';
-    firePositions.Add(position);
+    if (isPositionValid(position)) {
+        fireSpreadGrid[position.X, position.Y] = 'F';
+        firePositions.Add(position);
+    } else {
+        Console.WriteLine("New fire position was invalid! Not added to grid!");
+    }
+}
+
+bool isPositionValid(Vector2i pos) {
+    return pos.X < fireSpreadGrid.GetLength(0)
+                && pos.X >= 0
+                && pos.Y < fireSpreadGrid.GetLength(1)
+                && pos.Y >= 0;
 }
 
 struct Vector2i(int x, int y) {
@@ -143,6 +191,14 @@ struct Vector2i(int x, int y) {
 
     public static Vector2i operator +(Vector2i vector1, Vector2i vector2) {
         return new Vector2i(vector1.X + vector2.X, vector1.Y + vector2.Y);
+    }
+
+    public static bool operator ==(Vector2i vector1, Vector2i vector2) {
+        return (vector1.X == vector2.X && vector1.Y == vector2.Y);
+    }
+
+    public static bool operator !=(Vector2i vector1, Vector2i vector2) {
+        return !(vector1.X == vector2.X && vector1.Y == vector2.Y);
     }
     public override readonly string ToString() => $"({X}, {Y})";
 }
